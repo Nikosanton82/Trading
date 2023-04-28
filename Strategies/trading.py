@@ -11,7 +11,7 @@ stocks = [
     "AAPL", "MSFT", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "NVDA", "BRK-B", "JPM",
     "JNJ", "UNH", "V", "PG", "HD", "MA", "DIS", "BAC", "ADBE", "CRM", "CMCSA",
     "VZ", "NFLX", "XOM", "KO", "INTC", "CSCO", "PEP", "PFE", "T", "MRK", "WMT",
-    "ABT", "TMO", "AMGN", "BMY", "MMM", "MCD", "NKE", "LLY", "UNP", "MDT", "AVGO",
+    "ABT", "TMO", "AMGN", "MMM", "MCD", "NKE", "LLY", "UNP", "MDT", "AVGO",
     "IBM", "TXN", "QCOM", "GILD", "FIS", "HON", "ACN"
 ]
 
