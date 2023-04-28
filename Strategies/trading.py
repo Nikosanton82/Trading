@@ -8,7 +8,7 @@ from itertools import combinations
 
 # List of 50 most traded stocks (tickers)
 stocks = [
-    "AAPL", "MSFT", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "NVDA", "BRK-B", "JPM",
+    "AAPL", "MSFT", "AMZN", "META", "GOOGL", "GOOG", "TSLA", "NVDA",
     "JNJ", "UNH", "V", "PG", "HD", "MA", "DIS", "BAC", "ADBE", "CRM", "CMCSA",
     "VZ", "NFLX", "XOM", "KO", "INTC", "CSCO", "PEP", "PFE", "T", "MRK", "WMT",
     "ABT", "TMO", "AMGN", "MMM", "MCD", "NKE", "LLY", "UNP", "MDT", "AVGO",
@@ -16,7 +16,7 @@ stocks = [
 ]
 
 # Download historical data for the stocks
-start_date = "2000-01-01"
+start_date = "2000-01-04"
 end_date = "2023-04-27"
 
 stock_data = {}
@@ -41,7 +41,13 @@ coint_matrix = pd.DataFrame(index=stocks, columns=stocks)
 cointegrated_pairs = []
 
 for stock1, stock2 in combinations(stocks, 2):
-    _, p_value, _ = coint(stock_data[stock1]['Adj Close'], stock_data[stock2]['Adj Close'])
+    # Synchronize the date ranges of the two stock price series
+    common_dates = stock_data[stock1].index.intersection(stock_data[stock2].index)
+    stock1_prices = stock_data[stock1]['Adj Close'].loc[common_dates]
+    stock2_prices = stock_data[stock2]['Adj Close'].loc[common_dates]
+
+    # Perform the cointegration test
+    _, p_value, _ = coint(stock1_prices, stock2_prices)
     coint_matrix.loc[stock1, stock2] = p_value
     coint_matrix.loc[stock2, stock1] = p_value
 
